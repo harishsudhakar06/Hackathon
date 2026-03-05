@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — BizNest</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="dashboard-body">
+
+  <nav class="navbar dashboard-nav">
+    <div class="nav-brand">🏪 BizNest</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="payment.html">Payment</a></li>
+      <li><a href="expert.html">Expert Advice</a></li>
+      <li><a href="animations.html">✨ Experience</a></li>
+    </ul>
+    <div class="nav-user">
+      <span class="user-avatar">RK</span>
+      <span>Ravi's Store</span>
+    </div>
+  </nav>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <nav class="dash-nav">
+        <a href="#overview" class="dash-link active" onclick="showSection('overview',this)">
+          <span>📊</span> Overview
+        </a>
+        <a href="#orders" class="dash-link" onclick="showSection('orders',this)">
+          <span>📦</span> Orders
+        </a>
+        <a href="#inventory" class="dash-link" onclick="showSection('inventory',this)">
+          <span>🗃️</span> Inventory
+        </a>
+        <a href="#analytics" class="dash-link" onclick="showSection('analytics',this)">
+          <span>📈</span> Analytics
+        </a>
+        <a href="#customers" class="dash-link" onclick="showSection('customers',this)">
+          <span>👥</span> Customers
+        </a>
+      </nav>
+      <div class="sidebar-promo">
+        <p>🌟 Upgrade to Pro</p>
+        <small>Unlock advanced analytics & priority support</small>
+        <button class="btn-promo">Upgrade</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="dash-main">
+
+      <!-- OVERVIEW SECTION -->
+      <div id="section-overview" class="dash-section active">
+        <div class="dash-header">
+          <h2>Good morning, Ravi! 👋</h2>
+          <span class="dash-date" id="dashDate"></span>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div class="kpi-grid">
+          <div class="kpi-card green">
+            <div class="kpi-label">Today's Revenue</div>
+            <div class="kpi-value">₹18,450</div>
+            <div class="kpi-change positive">▲ 34% vs yesterday</div>
+          </div>
+          <div class="kpi-card blue">
+            <div class="kpi-label">Total Orders</div>
+            <div class="kpi-value">127</div>
+            <div class="kpi-change positive">▲ 12 new today</div>
+          </div>
+          <div class="kpi-card orange">
+            <div class="kpi-label">Products Listed</div>
+            <div class="kpi-value">84</div>
+            <div class="kpi-change neutral">→ 3 low stock</div>
+          </div>
+          <div class="kpi-card purple">
+            <div class="kpi-label">Total Customers</div>
+            <div class="kpi-value">1,209</div>
+            <div class="kpi-change positive">▲ 56 this month</div>
+          </div>
+        </div>
+
+        <!-- CHART + ORDERS -->
+        <div class="dash-row">
+          <div class="chart-card">
+            <div class="card-title">Weekly Revenue</div>
+            <div class="chart-area" id="revenueChart"></div>
+            <div class="chart-labels">
+              <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            </div>
+          </div>
+
+          <div class="recent-orders-card">
+            <div class="card-title">Recent Orders <a href="#" onclick="showSection('orders', document.querySelector('[onclick*=orders]'))">View all →</a></div>
+            <div class="orders-list" id="recentOrders"></div>
+          </div>
+        </div>
+
+        <!-- TOP PRODUCTS -->
+        <div class="top-products-card">
+          <div class="card-title">Top Selling Products</div>
+          <div class="top-products-list" id="topProducts"></div>
+        </div>
+      </div>
+
+      <!-- ORDERS SECTION -->
+      <div id="section-orders" class="dash-section">
+        <div class="dash-header">
+          <h2>📦 Orders</h2>
+          <span class="dash-date">Manage all incoming orders</span>
+        </div>
+        <div class="orders-filter">
+          <button class="filter-btn active" onclick="filterOrders('all',this)">All</button>
+          <button class="filter-btn" onclick="filterOrders('pending',this)">Pending</button>
+          <button class="filter-btn" onclick="filterOrders('processing',this)">Processing</button>
+          <button class="filter-btn" onclick="filterOrders('delivered',this)">Delivered</button>
+        </div>
+        <div class="orders-table-wrap">
+          <table class="orders-table" id="ordersTable">
+            <thead>
+              <tr>
+                <th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- INVENTORY SECTION -->
+      <div id="section-inventory" class="dash-section">
+        <div class="dash-header">
+          <h2>🗃️ Inventory</h2>
+          <button class="btn-primary small" onclick="showAddProduct()">+ Add Product</button>
+        </div>
+        <div class="inventory-grid" id="inventoryGrid"></div>
+
+        <!-- ADD PRODUCT MODAL -->
+        <div class="modal-overlay" id="addProductModal">
+          <div class="modal">
+            <div class="modal-header">
+              <h3>Add New Product</h3>
+              <button onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+              <label>Product Name</label>
+              <input type="text" id="newProductName" placeholder="e.g. Organic Honey"/>
+              <label>Category</label>
+              <select id="newProductCat">
+                <option>Food</option><option>Fashion</option><option>Crafts</option>
+                <option>Electronics</option><option>Beauty</option>
+              </select>
+              <label>Price (₹)</label>
+              <input type="number" id="newProductPrice" placeholder="299"/>
+              <label>Stock Quantity</label>
+              <input type="number" id="newProductStock" placeholder="50"/>
+              <label>Description</label>
+              <textarea id="newProductDesc" placeholder="Short product description..."></textarea>
+            </div>
+            <div class="modal-footer">
+              <button class="btn-ghost" onclick="closeModal()">Cancel</button>
+              <button class="btn-primary" onclick="addProduct()">Add Product</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANALYTICS SECTION -->
+      <div id="section-analytics" class="dash-section">
+        <div class="dash-header">
+          <h2>📈 Analytics</h2>
+          <span class="dash-date">Last 30 days performance</span>
+        </div>
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <div class="card-title">Revenue Trend (30 Days)</div>
+            <div class="analytics-chart" id="analyticsChart"></div>
+          </div>
+          <div class="analytics-card small">
+            <div class="card-title">Sales by Category</div>
+            <div class="donut-chart" id="donutChart"></div>
+            <div class="donut-legend" id="donutLegend"></div>
+          </div>
+          <div class="analytics-card small">
+            <div class="card-title">Customer Growth</div>
+            <div class="analytics-stats">
+              <div class="astat"><strong>1,209</strong><span>Total Customers</span></div>
+              <div class="astat green"><strong>+56</strong><span>This Month</span></div>
+              <div class="astat blue"><strong>4.7/5</strong><span>Avg Rating</span></div>
+              <div class="astat orange"><strong>68%</strong><span>Repeat Buyers</span></div>
+            </div>
+          </div>
+          <div class="analytics-card">
+            <div class="card-title">Top Performing Days</div>
+            <div class="heatmap" id="heatmap"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMERS SECTION -->
+      <div id="section-customers" class="dash-section">
+        <div class="dash-header">
+          <h2>👥 Customers</h2>
+          <span class="dash-date">Your customer base</span>
+        </div>
+        <div class="customers-grid" id="customersGrid"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+  <script src="animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BizNest — Experience</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="animations.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body class="anim-body">
+
+  <!-- PARTICLE CANVAS -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- CURSOR FOLLOWER -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav class="navbar anim-nav">
+    <div class="nav-brand">🏪 BizNest</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="payment.html">Payment</a></li>
+      <li><a href="expert.html">Expert Advice</a></li>
+      <li><a href="animations.html" class="active">Experience</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SPLASH -->
+  <section class="anim-hero">
+    <div class="anim-hero-inner">
+      <div class="glitch-wrap">
+        <h1 class="glitch" data-text="BizNest">BizNest</h1>
+      </div>
+      <p class="anim-sub reveal-text">Where Local Business Meets Digital Brilliance</p>
+      <div class="scroll-cta">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </div>
+    <!-- Floating orbs -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="orb orb4"></div>
+  </section>
+
+  <!-- COUNTER SECTION -->
+  <section class="counter-section reveal-section">
+    <div class="section-label">OUR IMPACT</div>
+    <h2 class="section-title">Numbers That <em>Speak</em></h2>
+    <div class="counters-grid">
+      <div class="counter-card" data-target="2400" data-suffix="+">
+        <div class="counter-num" id="c1">0</div>
+        <div class="counter-label">Businesses Onboarded</div>
+        <div class="counter-bar"><div class="counter-fill" style="width:80%"></div></div>
+      </div>
+      <div class="counter-card" data-target="42" data-suffix="Cr+">
+        <div class="counter-num" id="c2">0</div>
+        <div class="counter-label">Revenue Tracked (₹)</div>
+        <div class="counter-bar"><div class="counter-fill" style="width:90%"></div></div>
+      </div>
+      <div class="counter-card" data-target="98" data-suffix="%">
+        <div class="counter-num" id="c3">0</div>
+        <div class="counter-label">Customer Satisfaction</div>
+        <div class="counter-bar"><div class="counter-fill" style="width:98%"></div></div>
+      </div>
+      <div class="counter-card" data-target="150" data-suffix="K+">
+        <div class="counter-num" id="c4">0</div>
+        <div class="counter-label">Products Listed</div>
+        <div class="counter-bar"><div class="counter-fill" style="width:70%"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE BUTTONS SHOWCASE -->
+  <section class="buttons-section reveal-section">
+    <div class="section-label">INTERACTIVE UI</div>
+    <h2 class="section-title">Buttons & <em>Interactions</em></h2>
+    <div class="buttons-showcase">
+
+      <div class="btn-demo-group">
+        <h3>Primary Actions</h3>
+        <div class="btn-row">
+          <button class="ibtn ibtn-pulse" onclick="btnFeedback(this,'Launching!')">🚀 Launch Store</button>
+          <button class="ibtn ibtn-ripple" onclick="btnFeedback(this,'Added!')">🛒 Add to Cart</button>
+          <button class="ibtn ibtn-glow" onclick="btnFeedback(this,'Saved!')">💾 Save Changes</button>
+        </div>
+      </div>
+
+      <div class="btn-demo-group">
+        <h3>Status Buttons</h3>
+        <div class="btn-row">
+          <button class="ibtn ibtn-success" onclick="toggleSuccess(this)">✅ Mark Delivered</button>
+          <button class="ibtn ibtn-warning" onclick="toggleWarning(this)">⚠️ Low Stock Alert</button>
+          <button class="ibtn ibtn-danger" onclick="toggleDanger(this)">🗑️ Delete Item</button>
+        </div>
+      </div>
+
+      <div class="btn-demo-group">
+        <h3>Loading & Progress</h3>
+        <div class="btn-row">
+          <button class="ibtn ibtn-loader" onclick="triggerLoader(this)">📊 Generate Report</button>
+          <button class="ibtn ibtn-progress" onclick="triggerProgress(this)">📤 Upload Products</button>
+          <button class="ibtn ibtn-bounce" onclick="btnFeedback(this,'Shared!')">📢 Share Store</button>
+        </div>
+      </div>
+
+      <div class="btn-demo-group">
+        <h3>Toggle Switches</h3>
+        <div class="btn-row toggles-row">
+          <label class="toggle-wrap">
+            <input type="checkbox" checked onchange="toggleFeedback(this,'Store Online')"/>
+            <span class="toggle-track"></span>
+            <span class="toggle-label">Store Online</span>
+          </label>
+          <label class="toggle-wrap">
+            <input type="checkbox" onchange="toggleFeedback(this,'Notifications')"/>
+            <span class="toggle-track"></span>
+            <span class="toggle-label">Notifications</span>
+          </label>
+          <label class="toggle-wrap">
+            <input type="checkbox" checked onchange="toggleFeedback(this,'Analytics')"/>
+            <span class="toggle-track"></span>
+            <span class="toggle-label">Analytics</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURE CARDS (SCROLL REVEAL) -->
+  <section class="feature-anim-section reveal-section">
+    <div class="section-label">PLATFORM FEATURES</div>
+    <h2 class="section-title">Built for <em>Growth</em></h2>
+    <div class="feature-anim-grid">
+      <div class="fanim-card" style="--delay:0s">
+        <div class="fanim-icon">🛍️</div>
+        <h3>Smart Storefront</h3>
+        <p>AI-powered product recommendations that help customers discover what they love.</p>
+        <div class="fanim-glow"></div>
+      </div>
+      <div class="fanim-card" style="--delay:0.1s">
+        <div class="fanim-icon">📊</div>
+        <h3>Live Analytics</h3>
+        <p>Real-time revenue and customer insights updated every minute.</p>
+        <div class="fanim-glow"></div>
+      </div>
+      <div class="fanim-card" style="--delay:0.2s">
+        <div class="fanim-icon">💳</div>
+        <h3>Instant Payments</h3>
+        <p>Collect payments via UPI, cards, and wallets — money in your account instantly.</p>
+        <div class="fanim-glow"></div>
+      </div>
+      <div class="fanim-card" style="--delay:0.3s">
+        <div class="fanim-icon">🎓</div>
+        <h3>Expert Network</h3>
+        <p>Connect with verified business mentors who've scaled businesses like yours.</p>
+        <div class="fanim-glow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section reveal-section">
+    <div class="section-label">JOURNEY</div>
+    <h2 class="section-title">Your Growth <em>Path</em></h2>
+    <div class="timeline">
+      <div class="tl-item left">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-step">Day 1</span>
+          <h3>Register & Setup</h3>
+          <p>Create your store, add products, and go live in under 30 minutes.</p>
+        </div>
+      </div>
+      <div class="tl-item right">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-step">Week 1</span>
+          <h3>First Orders</h3>
+          <p>Start receiving orders from local customers discovering your business online.</p>
+        </div>
+      </div>
+      <div class="tl-item left">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-step">Month 1</span>
+          <h3>Growth Analytics</h3>
+          <p>Track your best products, peak hours, and customer patterns.</p>
+        </div>
+      </div>
+      <div class="tl-item right">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-step">Month 3</span>
+          <h3>Expert Guidance</h3>
+          <p>Connect with advisors to scale revenue, optimize pricing, and expand reach.</p>
+        </div>
+      </div>
+      <div class="tl-item left">
+        <div class="tl-dot active"></div>
+        <div class="tl-card accent-card">
+          <span class="tl-step">6 Months+</span>
+          <h3>🚀 Thriving Business</h3>
+          <p>You're now a digital-first local brand with loyal customers and steady growth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA ANIMATED -->
+  <section class="anim-cta">
+    <div class="anim-cta-bg"></div>
+    <div class="anim-cta-content">
+      <h2>Ready to <span class="anim-word" id="animWord">Launch?</span></h2>
+      <p>Join 2,400+ businesses growing with BizNest today.</p>
+      <div class="cta-buttons">
+        <a href="products.html" class="ibtn ibtn-glow large">Browse Products</a>
+        <a href="expert.html" class="ibtn ibtn-outline large">Talk to an Expert</a>
+        <a href="payment.html" class="ibtn ibtn-pulse large">Start Free Trial</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-brand">🏪 BizNest</div>
+    <p>Empowering local businesses to thrive in the digital world.</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="payment.html">Payment</a>
+      <a href="expert.html">Expert Advice</a>
+    </div>
+    <p class="footer-copy">© 2024 BizNest. Built for small business owners.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+  <script src="animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BizNest — Expert Advice</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="animations.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">🏪 BizNest</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="payment.html">Payment</a></li>
+      <li><a href="expert.html" class="active">Expert Advice</a></li>
+      <li><a href="animations.html">Experience</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="expert-hero">
+    <div class="expert-hero-bg"></div>
+    <div class="expert-hero-content">
+      <span class="hero-tag">🎓 Expert Network</span>
+      <h1>Get <span class="highlight">Expert Advice</span><br/>for Your Business</h1>
+      <p>Connect with verified business mentors, financial advisors, and digital marketing experts who have real experience scaling local businesses.</p>
+      <div class="hero-actions">
+        <a href="#advisors" class="btn-primary">Browse Experts</a>
+        <a href="#ask-form" class="btn-ghost">Ask a Question</a>
+      </div>
+    </div>
+    <div class="expert-hero-stats">
+      <div class="ex-stat"><strong>120+</strong><span>Verified Experts</span></div>
+      <div class="ex-stat"><strong>4.9★</strong><span>Average Rating</span></div>
+      <div class="ex-stat"><strong>5,000+</strong><span>Sessions Completed</span></div>
+      <div class="ex-stat"><strong>24h</strong><span>Response Time</span></div>
+    </div>
+  </section>
+
+  <!-- CATEGORY FILTER -->
+  <section class="expert-filter-bar">
+    <div class="category-filters">
+      <button class="filter-btn active" onclick="filterExperts('all',this)">All Experts</button>
+      <button class="filter-btn" onclick="filterExperts('finance',this)">💰 Finance</button>
+      <button class="filter-btn" onclick="filterExperts('marketing',this)">📢 Marketing</button>
+      <button class="filter-btn" onclick="filterExperts('operations',this)">⚙️ Operations</button>
+      <button class="filter-btn" onclick="filterExperts('tech',this)">💻 Technology</button>
+      <button class="filter-btn" onclick="filterExperts('legal',this)">⚖️ Legal</button>
+    </div>
+  </section>
+
+  <!-- ADVISORS GRID -->
+  <section class="advisors-section" id="advisors">
+    <div class="advisors-grid" id="advisorsGrid"></div>
+  </section>
+
+  <!-- ASK EXPERT FORM -->
+  <section class="ask-section" id="ask-form">
+    <div class="ask-card">
+      <div class="ask-left">
+        <div class="section-label">QUICK CONSULTATION</div>
+        <h2>Ask an <em>Expert</em></h2>
+        <p>Post your business question and get a detailed response from a verified expert within 24 hours — completely free for your first question.</p>
+        <div class="ask-benefits">
+          <div class="ask-benefit">✅ Free first consultation</div>
+          <div class="ask-benefit">⚡ Response in 24 hours</div>
+          <div class="ask-benefit">🔒 100% confidential</div>
+          <div class="ask-benefit">🎯 Matched to relevant expert</div>
+        </div>
+      </div>
+      <div class="ask-right">
+        <div class="ask-form-inner" id="askFormInner">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="Ravi Kumar" class="pay-input" id="askName"/>
+          </div>
+          <div class="form-group">
+            <label>Business Type</label>
+            <select class="pay-input" id="askBizType">
+              <option value="">Select type...</option>
+              <option>Retail Shop</option>
+              <option>Food & Beverages</option>
+              <option>Handicrafts</option>
+              <option>Services</option>
+              <option>Manufacturing</option>
+              <option>E-Commerce</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Topic</label>
+            <select class="pay-input" id="askTopic">
+              <option value="">Select topic...</option>
+              <option>Sales & Revenue</option>
+              <option>Digital Marketing</option>
+              <option>Inventory Management</option>
+              <option>Financial Planning</option>
+              <option>Legal & Compliance</option>
+              <option>Technology Setup</option>
+              <option>Customer Retention</option>
+              <option>Business Expansion</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Your Question</label>
+            <textarea class="pay-input" rows="4" placeholder="Describe your business challenge in detail..." id="askQuestion"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Preferred Response Format</label>
+            <div class="radio-group">
+              <label class="radio-opt"><input type="radio" name="respFormat" value="text" checked/> Written Advice</label>
+              <label class="radio-opt"><input type="radio" name="respFormat" value="video"/> Video Call</label>
+              <label class="radio-opt"><input type="radio" name="respFormat" value="chat"/> Live Chat</label>
+            </div>
+          </div>
+          <button class="ibtn ibtn-pulse full-btn" onclick="submitAsk()">Submit Question →</button>
+        </div>
+        <!-- Success state -->
+        <div class="ask-success" id="askSuccess" style="display:none">
+          <div class="success-anim">
+            <div class="success-circle"><span class="success-check">✓</span></div>
+          </div>
+          <h3>Question Submitted!</h3>
+          <p>Our system has matched your query to <strong id="matchedExpert">Dr. Priya Venkatesh</strong>. Expect a response within 24 hours.</p>
+          <button class="ibtn ibtn-ghost" onclick="resetAsk()">Ask Another Question</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE CHAT MODULE -->
+  <div class="chat-fab" id="chatFab" onclick="toggleChat()">
+    <span class="chat-fab-icon">💬</span>
+    <span class="chat-fab-text">Ask Expert</span>
+    <span class="chat-notif">1</span>
+  </div>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-expert-info">
+        <div class="chat-avatar">PV</div>
+        <div>
+          <div class="chat-expert-name">Dr. Priya Venkatesh</div>
+          <div class="chat-expert-status"><span class="online-dot"></span> Online • Finance Expert</div>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg bot">
+        <div class="chat-bubble">Hello! I'm Dr. Priya, your finance expert. How can I help your business grow today? 😊</div>
+        <div class="chat-time">Just now</div>
+      </div>
+    </div>
+    <div class="chat-quick-replies" id="quickReplies">
+      <button class="quick-reply" onclick="sendQuick('How to increase my revenue?')">How to increase revenue?</button>
+      <button class="quick-reply" onclick="sendQuick('How to manage cash flow?')">Cash flow tips?</button>
+      <button class="quick-reply" onclick="sendQuick('How to get a business loan?')">Business loan help?</button>
+    </div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="Ask your question..." onkeydown="if(event.key==='Enter')sendChat()"/>
+      <button class="chat-send-btn" onclick="sendChat()">➤</button>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section reveal-section">
+    <div class="section-label">SUCCESS STORIES</div>
+    <h2 class="section-title">Businesses We've <em>Transformed</em></h2>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p>After just one session with BizNest's finance expert, I restructured my pricing and increased margins by 40%. Best decision ever.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#e94560">MK</div>
+          <div>
+            <strong>Meena Krishnan</strong>
+            <span>Handloom Sarees, Chennai</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p>The digital marketing expert helped me set up Instagram ads. Within a month, my online orders tripled. Incredible ROI!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#2980b9">RS</div>
+          <div>
+            <strong>Rajesh Sharma</strong>
+            <span>Organic Foods, Coimbatore</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-quote">"</div>
+        <p>I was struggling with GST and compliance. The legal expert sorted everything out in two sessions. I can now focus on growing!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#27ae60">AP</div>
+          <div>
+            <strong>Ananya Pillai</strong>
+            <span>Artisan Bakery, Vellore</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-brand">🏪 BizNest</div>
+    <p>Empowering local businesses to thrive in the digital world.</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="payment.html">Payment</a>
+      <a href="expert.html">Expert Advice</a>
+    </div>
+    <p class="footer-copy">© 2024 BizNest. Built for small business owners.</p>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+  <script src="animations.js"></script>
+</body>
+</html>
